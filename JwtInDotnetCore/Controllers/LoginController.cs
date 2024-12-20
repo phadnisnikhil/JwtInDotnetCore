@@ -23,26 +23,33 @@ namespace JwtInDotnetCore.Controllers
         {
             //your logic for login process
             //If login usrename and password are correct then proceed to generate token
-            if (loginRequest.Email == "phadnisnikhil@yahoo.com" && loginRequest.Password == "Ni@140814")
+            //change user ID and paasword as per your database credentials 
+            try
             {
+                if (loginRequest.Email == "phadnisnikhil@yahoo.com" && loginRequest.Password == "Ni@140814")
+                {
 
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-                var claims = new[]{
-                                     new Claim(ClaimTypes.Name, "username"),
-                                     new Claim(ClaimTypes.Role, "Admin")};
-                var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
-                  _config["Jwt:Issuer"],
-                 claims: claims,
-                  expires: DateTime.Now.AddMinutes(120),
-                  signingCredentials: credentials);
+                    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+                    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-                var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+                    var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
+                      _config["Jwt:Issuer"],
+                     claims: null,
+                     expires: DateTime.Now.AddMinutes(120),
+                     signingCredentials: credentials);
 
-                return Ok(token);
+                    var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+
+                    return Ok(token);
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
-            else {
-                return BadRequest();
+            catch
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError);
             }
         }
     }

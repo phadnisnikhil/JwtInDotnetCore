@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JwtInDotnetCore.Controllers
 {
- //   [Authorize]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class GetDetails : ControllerBase
