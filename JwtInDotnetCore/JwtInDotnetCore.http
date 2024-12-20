@@ -1,0 +1,6 @@
+@JwtInDotnetCore_HostAddress = http://localhost:5090
+
+GET {{JwtInDotnetCore_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
