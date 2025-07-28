@@ -5,11 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace JwtInDotnetCore.Controllers
 {
     [Authorize]
-<<<<<<< HEAD
 
-=======
   //[Authorize(Roles = "Admin")]
->>>>>>> INC-7900
+
     [Route("api/[controller]")]
     [ApiController]
     public class GetDetails : ControllerBase
