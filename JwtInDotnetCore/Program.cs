@@ -3,7 +3,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
 //Jwt configuration starts here
 var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
 var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
@@ -19,22 +18,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
          ValidateIssuerSigningKey = true,
          ValidIssuer = jwtIssuer,
          ValidAudience = jwtIssuer,
-         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+         RequireExpirationTime = true
      };
  });
 //Jwt configuration ends here
 
-
-
-
-
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+
 //builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+}
 if (app.Environment.IsDevelopment())
 {
     //app.UseSwagger();
