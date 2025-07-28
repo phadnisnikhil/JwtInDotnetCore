@@ -11,7 +11,7 @@ namespace JwtInDotnetCore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Hello World");
+            return Ok("API is accessible !!");
         }
     }
 }
