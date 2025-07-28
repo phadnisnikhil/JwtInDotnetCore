@@ -3,15 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JwtInDotnetCore.Controllers
 {
-    [Authorize]
+   //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    //This is to check API without token
     public class HelloWorldController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public string Get()
         {
-            return Ok("Hello World");
+            return ("Hello World");
         }
     }
 }

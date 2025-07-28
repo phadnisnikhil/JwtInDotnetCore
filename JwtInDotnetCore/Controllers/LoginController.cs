@@ -30,12 +30,14 @@ namespace JwtInDotnetCore.Controllers
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
                 var claims = new[]{
                                      new Claim(ClaimTypes.Name, "username"),
-                                     new Claim(ClaimTypes.Role, "Admin")};
+                                     new Claim(ClaimTypes.Role, "Admin"),
+                                      new Claim(ClaimTypes.MobilePhone,"9325291039"),  
+                                        };
                 var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
                   _config["Jwt:Issuer"],
                  claims: claims,
-                  expires: DateTime.Now.AddMinutes(120),
-                  signingCredentials: credentials);
+                 expires: DateTime.Now.AddSeconds(15),
+                 signingCredentials: credentials);
 
                 var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
