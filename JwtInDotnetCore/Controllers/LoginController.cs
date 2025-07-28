@@ -29,12 +29,10 @@ namespace JwtInDotnetCore.Controllers
                 if (loginRequest.Email == "phadnisnikhil@yahoo.com" && loginRequest.Password == "Ni@140814")
                 {
 
-<<<<<<< HEAD
+
                     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-=======
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+               
                 var claims = new[]{
                                      new Claim(ClaimTypes.Name, "username"),
                                      new Claim(ClaimTypes.Role, "Admin"),
@@ -45,13 +43,6 @@ namespace JwtInDotnetCore.Controllers
                  claims: claims,
                  expires: DateTime.Now.AddSeconds(15),
                  signingCredentials: credentials);
->>>>>>> INC-7900
-
-                    var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
-                      _config["Jwt:Issuer"],
-                     claims: null,
-                     expires: DateTime.Now.AddMinutes(120),
-                     signingCredentials: credentials);
 
                     var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
